@@ -1,21 +1,21 @@
 version: "3.7"
 services: 
-  comite_api: 
-    container_name: comite_api
+  comite_sanitario_api: 
+    container_name: comite_sanitario_api
     build: ./backend
     depends_on: 
-      - comite_db
+      - comite_sanitario_db
     ports:
       - "9090:9090"
     environment: 
-      - DB_URI=postgresql://comite_admin:comite_admin@comite_db/comite_db
+      - DB_URI=postgresql://comite_admin:comite_admin@comite_sanitario_db/comite_sanitario_db
     restart: always
 
-  comite_db: 
-    container_name: comite_db
+  comite_sanitario_db: 
+    container_name: comite_sanitario_db
     image: "postgres:latest"
     environment: 
-      - POSTGRES_DB=comite_db
+      - POSTGRES_DB=comite_sanitario_db
       - POSTGRES_USER=comite_admin
       - POSTGRES_PASSWORD=comite_admin
     ports:
@@ -25,7 +25,7 @@ services:
     container_name: postgres_admin
     image: dpage/pgadmin4
     depends_on: 
-      - comite_db
+      - comite_sanitario_db
     environment: 
       - PGADMIN_DEFAULT_EMAIL=comite_admin@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=comite_admin
