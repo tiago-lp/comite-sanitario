@@ -1,0 +1,36 @@
+version: "3.7"
+services: 
+  comite_api: 
+    container_name: comite_api
+    build: ./backend
+    depends_on: 
+      - comite_db
+    ports:
+      - "9090:9090"
+    environment: 
+      - DB_URI=postgresql://comite_admin:comite_admin@comite_db/comite_db
+    restart: always
+
+  comite_db: 
+    container_name: comite_db
+    image: "postgres:latest"
+    environment: 
+      - POSTGRES_DB=comite_db
+      - POSTGRES_USER=comite_admin
+      - POSTGRES_PASSWORD=comite_admin
+    ports:
+      - "5432:5432"
+
+  postgres_admin:
+    container_name: postgres_admin
+    image: dpage/pgadmin4
+    depends_on: 
+      - comite_db
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=comite_admin@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=comite_admin
+    ports: 
+      - "3333:80"
+
+volumes: 
+  comite-data:
