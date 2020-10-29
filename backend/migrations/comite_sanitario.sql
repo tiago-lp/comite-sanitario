@@ -71,5 +71,36 @@ CREATE TABLE IF NOT EXISTS `comite_db`.`donations` (
   PRIMARY KEY (`donation_id`));
 
 
+CREATE OR REPLACE FUNCTION add_family_income()
+    RETURNS trigger AS
+$BODY$
+BEGIN
+  UPDATE families
+      SET income = income + NEW.income WHERE family_id = NEW.families_family_id;
+	RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+CREATE TRIGGER add_family_income
+    AFTER INSERT
+    ON people
+    FOR EACH ROW
+    EXECUTE PROCEDURE add_family_income();
+
+CREATE OR REPLACE FUNCTION update_family_income()
+    RETURNS trigger AS
+$BODY$
+BEGIN
+  UPDATE families
+      SET income = income - OLD.income + NEW.income WHERE family_id = NEW.families_family_id;
+	RETURN NEW;
+END;
+$BODY$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_family_income
+    AFTER UPDATE
+    ON people
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_family_income();
 -- TODO : create function / trigger to update 'income' of a family when a person is created
 -- or updated related to any family. In case of person has not family, do nothing.
