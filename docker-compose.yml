@@ -8,7 +8,7 @@ services:
     ports:
       - "9090:9090"
     environment: 
-      - DB_URI=postgresql://comite_admin:comite_admin@comite_sanitario_db/comite_sanitario_db
+      - DB_URI=postgresql://postgres:postgres@comite_sanitario_db/comite_sanitario_db
     restart: always
 
   comite_sanitario_db: 
@@ -16,8 +16,9 @@ services:
     image: "postgres:latest"
     environment: 
       - POSTGRES_DB=comite_sanitario_db
-      - POSTGRES_USER=comite_admin
-      - POSTGRES_PASSWORD=comite_admin
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
     ports:
       - "5432:5432"
 
