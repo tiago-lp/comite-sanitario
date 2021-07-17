@@ -17,16 +17,18 @@ TYPE_CHOICES = (
 
 # Create your models here.
 
-class Families(models.Model):
+class Family(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=120, null=False)
     income = models.FloatField(default=0.0)
     deleted = models.BooleanField(default=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "Families"
 
 
-class People(models.Model):
+class Person(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=120)
     age = models.IntegerField()
@@ -38,13 +40,14 @@ class People(models.Model):
     phone = models.CharField(max_length=40)
     ocupation = models.CharField(max_length=120)
     income = models.FloatField(default=0.0)
-    family = models.ForeignKey(Families, on_delete=models.CASCADE)
+    family = models.ForeignKey(Family, on_delete=models.CASCADE)
     deleted = models.BooleanField(default=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    class Meta:
+        verbose_name_plural = "People"
 
-
-class Donations(models.Model):
+class Donation(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.IntegerField(choices=TYPE_CHOICES, null=False, default=1)
     destined_to = models.IntegerField(choices=DESTINATION_CHOICES, null=False, default=1)
