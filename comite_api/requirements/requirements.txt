@@ -4,4 +4,4 @@ psycopg2-binary==2.8.6
 django-multiselectfield==0.1.12
 uWSGI==2.0.19.1
 drf-spectacular==0.13.2
-djangorestframework==3.12.2
+djangorestframework_simplejwt==4.7.2
