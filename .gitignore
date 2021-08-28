@@ -16,3 +16,6 @@ env/
 __pycache__/
 *.py[cod]
 *$py.class
+
+comite_front/node_modules
+comite_front/package-lock.json
