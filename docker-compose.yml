@@ -2,7 +2,7 @@ version: "3.8"
 services: 
   comite_sanitario_api: 
     container_name: comite_sanitario_api
-    build: ./backend
+    build: ./comite_api
     depends_on: 
       - comite_sanitario_db
     ports:

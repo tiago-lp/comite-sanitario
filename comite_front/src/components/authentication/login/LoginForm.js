@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik, Form, FormikProvider } from 'formik';
 import { Icon } from '@iconify/react';
@@ -13,12 +13,15 @@ import {
   InputAdornment,
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
-
+import { loginRequest } from '../../../actions/sessionActions';
+import { useDispatch, useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+  const session = useSelector(state => state.session);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -29,11 +32,17 @@ export default function LoginForm() {
     initialValues: {
       email: '',
       password: '',
-      remember: true
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
-      navigate('/dashboard', { replace: true });
+      dispatch(
+        loginRequest({
+          username: values.email,
+          password: values.password
+        })
+      );
+
+      // navigate('/dashboard', { replace: true });
     }
   });
 
@@ -42,6 +51,14 @@ export default function LoginForm() {
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
+
+  useEffect(() => {
+    if (session.loggedIn) {
+      navigate('/dashboard', { replace: true });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session.loggedIn]);
+
 
   return (
     <FormikProvider value={formik}>
