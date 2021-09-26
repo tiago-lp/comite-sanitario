@@ -5,6 +5,7 @@ from rest_framework import routers
 from comite_api.settings import DEBUG
 from core import views
 from rest_framework_simplejwt import views as jwt_views
+# from django.conf.urls import url
 
 
 router = routers.DefaultRouter()
@@ -17,6 +18,7 @@ urlpatterns = [
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include(router.urls)),
     path('api/admin/', admin.site.urls),
+    # url(r'^', views.FrontendAppView.as_view())
 ]
 
 if DEBUG:
