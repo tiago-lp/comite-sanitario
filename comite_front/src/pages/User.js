@@ -1,15 +1,12 @@
 import { filter } from 'lodash';
 import { Icon } from '@iconify/react';
-import { sentenceCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
-import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
   Card,
   Table,
   Stack,
-  Avatar,
   Button,
   Checkbox,
   TableRow,
@@ -34,8 +31,9 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dash
 import USERLIST from '../_mocks_/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPeopleRequest } from 'src/actions/peopleActions';
-import AuthGuard from '../components/AuthGuard'
-import FormDialog from 'src/components/personFormDialog';
+import AuthGuard from '../components/AuthGuard';
+import Map from '../components/Map';
+import FormDialog from 'src/components/PersonFormDialog';
 
 // ----------------------------------------------------------------------
 
@@ -89,8 +87,25 @@ export default function User() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const dispatch = useDispatch();
   const people = useSelector(state => state.people);
-  
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
+  const [openLocation, setOpenLocation] = useState(false);
   const [open, setOpen] = useState(false);
+  const [address, setAddress] = useState('');
+
+  const handleCloseLocation = () => {
+    setOpenLocation(false);
+    setLatitude(0);
+    setLongitude(0);
+    setAddress('');    
+  };
+
+  const handleOpenLocation = (geolocation, address) => {
+    setAddress(address);
+    setLatitude(Number(geolocation?.split(";")[0]) || -7.2246984);
+    setLongitude(Number(geolocation?.split(";")[1]) || -35.8887188);
+    setOpenLocation(true);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -163,7 +178,7 @@ export default function User() {
         <Container>
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography variant="h4" gutterBottom>
-              User
+              Pessoas
             </Typography>
             <Button
               variant="contained"
@@ -197,7 +212,7 @@ export default function User() {
                     {people.people
                       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                       .map((row) => {
-                        const { id, name, age, phone, cpf, income, geolocation } = row;
+                        const { id, name, age, phone, cpf, income, geolocation, address } = row;
                         const avatarUrl = '/static/mock-images/avatars/avatar_0.jpg'
                         const isItemSelected = selected.indexOf(name) !== -1;
 
@@ -218,7 +233,6 @@ export default function User() {
                             </TableCell>
                             <TableCell component="th" scope="row" padding="none">
                               <Stack direction="row" alignItems="center" spacing={2}>
-                                <Avatar alt={name} src={avatarUrl} />
                                 <Typography variant="subtitle2" noWrap>
                                   {name}
                                 </Typography>
@@ -227,8 +241,15 @@ export default function User() {
                             <TableCell align="left">{age}</TableCell>
                             <TableCell align="left">{phone}</TableCell>
                             <TableCell align="left">{cpf}</TableCell>
-                            <TableCell align="left">{income}</TableCell>
-                            <TableCell align="left">{geolocation}</TableCell>
+                            <TableCell align="left">{income.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</TableCell>
+                            <TableCell align="left">
+                              <Button
+                                variant="contained"
+                                onClick={() => handleOpenLocation(geolocation, address)}
+                              >
+                                Abrir
+                              </Button>
+                            </TableCell>
                             <TableCell align="right">
                               <UserMoreMenu id={id} person={row}/>
                             </TableCell>
@@ -267,6 +288,17 @@ export default function User() {
         </Container>
       </Page>
       <FormDialog open={open} person={{}} handleClose={handleClose} />
+      <div>
+      <Dialog open={openLocation} onClose={handleCloseLocation} fullWidth>
+        <DialogTitle>{address || 'Localização'}</DialogTitle>
+        <DialogContent>
+          <Map lat={latitude} lng={longitude}/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseLocation}>ok</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
     </AuthGuard>
   );
 }

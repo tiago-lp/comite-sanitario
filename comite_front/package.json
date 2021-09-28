@@ -74,7 +74,9 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-state-sync": "^3.1.1",
     "redux-thunk": "^2.3.0",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "google-map-react": "~2.0.8",
+    "react-places-autocomplete": "~7.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

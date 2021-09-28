@@ -8,7 +8,7 @@ import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { deletePersonRequest } from 'src/actions/peopleActions';
-import FormDialog from 'src/components/personFormDialog';
+import FormDialog from 'src/components/PersonFormDialog';
 // ----------------------------------------------------------------------
 
 export default function UserMoreMenu({id, person}) {
