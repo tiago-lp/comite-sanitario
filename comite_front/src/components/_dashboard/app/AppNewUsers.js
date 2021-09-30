@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import appleFilled from '@iconify/icons-ant-design/apple-filled';
+import creditCardOutlined from '@iconify/icons-ant-design/credit-card-outlined';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
@@ -34,17 +34,26 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 1352831;
 
-export default function AppNewUsers() {
+export default function AppNewUsers({donations}) {
+  const getTotal = () => {
+    let total = 0;
+    donations.forEach(donation => {
+      if (donation.received) {
+        total += 1;
+      };
+    })
+    return total;
+  }
+
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Icon icon={appleFilled} width={24} height={24} />
+        <Icon icon={creditCardOutlined} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(getTotal())}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        New Users
+        Doações recebidas
       </Typography>
     </RootStyle>
   );

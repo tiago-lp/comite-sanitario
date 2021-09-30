@@ -6,6 +6,7 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import Login from './pages/Login';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/User';
+import Donation from './pages/Donation';
 import NotFound from './pages/Page404';
 
 // ----------------------------------------------------------------------
@@ -19,6 +20,7 @@ export default function Router() {
         { path: '', element: <Navigate to="/dashboard/app" replace /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
+        { path: 'donation', element: <Donation /> },
       ]
     },
     {

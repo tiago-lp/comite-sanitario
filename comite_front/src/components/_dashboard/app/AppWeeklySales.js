@@ -1,10 +1,8 @@
 import { Icon } from '@iconify/react';
-import androidFilled from '@iconify/icons-ant-design/android-filled';
-// material
+import creditCardOutlined from '@iconify/icons-ant-design/credit-card-outlined';
 import { alpha, styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
 // utils
-import { fShortenNumber } from '../../../utils/formatNumber';
 
 // ----------------------------------------------------------------------
 
@@ -34,17 +32,30 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 714000;
 
-export default function AppWeeklySales() {
+export default function AppWeeklySales({donations}) {
+  const getTotal = () => {
+    let total = 0;
+    donations.forEach(donation => {
+      if (Number(donation.type) === 1 && donation.received) {
+        total += donation.value;
+      };
+    })
+    return total;
+  };
+
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Icon icon={androidFilled} width={24} height={24} />
+        <Icon icon={creditCardOutlined} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">
+        {
+          getTotal().toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})
+        }
+      </Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Weekly Sales
+        Total recebido (R$)
       </Typography>
     </RootStyle>
   );

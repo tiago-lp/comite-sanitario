@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import bugFilled from '@iconify/icons-ant-design/bug-filled';
+import peopleFill from '@iconify/icons-eva/people-fill';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
@@ -34,17 +34,16 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 234;
 
-export default function AppBugReports() {
+export default function AppBugReports({people}) {
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Icon icon={bugFilled} width={24} height={24} />
+        <Icon icon={peopleFill} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(people.length)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Bug Reports
+        Pessoas cadastradas
       </Typography>
     </RootStyle>
   );

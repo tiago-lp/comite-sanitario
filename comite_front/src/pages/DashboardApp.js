@@ -1,25 +1,32 @@
+import { useEffect } from 'react';
 // material
 import { Box, Grid, Container, Typography } from '@material-ui/core';
 // components
 import Page from '../components/Page';
 import {
-  AppTasks,
   AppNewUsers,
   AppBugReports,
   AppItemOrders,
-  AppNewsUpdate,
   AppWeeklySales,
-  AppOrderTimeline,
   AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppCurrentSubject,
-  AppConversionRates
 } from '../components/_dashboard/app';
 import AuthGuard from '../components/AuthGuard'
+import { useDispatch, useSelector } from 'react-redux';
+import { getDonationsRequest } from 'src/actions/donationActions';
+import { getPeopleRequest } from 'src/actions/peopleActions';
+
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
+  const dispatch = useDispatch();
+  const donation = useSelector(state => state.donation);
+  const people = useSelector(state => state.people);
+
+  useEffect(() => {
+    dispatch(getDonationsRequest());
+    dispatch(getPeopleRequest());
+  }, [dispatch]);
+
   return (
     <AuthGuard>
       <Page title="Dashboard">
@@ -29,48 +36,24 @@ export default function DashboardApp() {
           </Box>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} md={3}>
-              <AppWeeklySales />
+              <AppWeeklySales donations={donation.donations}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <AppNewUsers />
+              <AppNewUsers donations={donation.donations}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <AppItemOrders />
+              <AppItemOrders donations={donation.donations}/>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <AppBugReports />
+              <AppBugReports people={people.people}/>
             </Grid>
-
+{/* 
             <Grid item xs={12} md={6} lg={8}>
-              <AppWebsiteVisits />
-            </Grid>
+              <AppWebsiteVisits donations={donation.donations}/>
+            </Grid> */}
 
             <Grid item xs={12} md={6} lg={4}>
-              <AppCurrentVisits />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={8}>
-              <AppConversionRates />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4}>
-              <AppCurrentSubject />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={8}>
-              <AppNewsUpdate />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4}>
-              <AppOrderTimeline />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4}>
-              <AppTrafficBySite />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={8}>
-              <AppTasks />
+              <AppCurrentVisits donations={donation.donations}/>
             </Grid>
           </Grid>
         </Container>

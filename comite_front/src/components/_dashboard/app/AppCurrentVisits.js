@@ -31,9 +31,8 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [4344, 5435, 1443, 4443];
 
-export default function AppCurrentVisits() {
+export default function AppCurrentVisits({donations}) {
   const theme = useTheme();
 
   const chartOptions = merge(BaseOptionChart(), {
@@ -43,7 +42,7 @@ export default function AppCurrentVisits() {
       theme.palette.warning.main,
       theme.palette.error.main
     ],
-    labels: ['America', 'Asia', 'Europe', 'Africa'],
+    labels: ['Dinheiro', 'Alimento', 'Outros'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
@@ -61,11 +60,27 @@ export default function AppCurrentVisits() {
     }
   });
 
+  const getChartData = () => {
+    let money = 0;
+    let food = 0;
+    let others = 0;
+    donations?.forEach(donation => {
+      if (Number(donation.type) === 1) {
+        money += 1;
+      } else if (Number(donation.type) === 2) {
+        food += 1;
+      } else {
+        others += 1;
+      }
+    });
+    return [money, food, others];
+  };
+
   return (
     <Card>
-      <CardHeader title="Current Visits" />
+      <CardHeader title="Tipos de doações" />
       <ChartWrapperStyle dir="ltr">
-        <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} height={280} />
+        <ReactApexChart type="pie" series={getChartData()} options={chartOptions} height={280} />
       </ChartWrapperStyle>
     </Card>
   );

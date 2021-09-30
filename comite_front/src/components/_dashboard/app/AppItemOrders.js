@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import windowsFilled from '@iconify/icons-ant-design/windows-filled';
+import creditCardOutlined from '@iconify/icons-ant-design/credit-card-outlined';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Card, Typography } from '@material-ui/core';
@@ -34,17 +34,26 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 1723315;
 
-export default function AppItemOrders() {
+export default function AppItemOrders({donations}) {
+  const getTotal = () => {
+    let total = 0;
+    donations.forEach(donation => {
+      if (!donation.received) {
+        total += 1;
+      };
+    })
+    return total;
+  }
+
   return (
     <RootStyle>
       <IconWrapperStyle>
-        <Icon icon={windowsFilled} width={24} height={24} />
+        <Icon icon={creditCardOutlined} width={24} height={24} />
       </IconWrapperStyle>
-      <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
+      <Typography variant="h3">{fShortenNumber(getTotal())}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Item Orders
+        Doações pendentes
       </Typography>
     </RootStyle>
   );
