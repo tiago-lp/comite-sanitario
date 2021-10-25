@@ -52,6 +52,6 @@ Após esse comando será solicitado um username, email e Password (Password é e
     python manage.py runserver
 ```
 
-Com isso podemos acessar [http://localhost:8000/api/admin](http://localhost:8000/api/admin) (Atenção, aqui pode não ser a mesma porta 8000 no seu. Verifique a porta em que está rodando no terminal em que você executou o comando "python manage.py runserver")
+Com isso podemos acessar [http://localhost:8000/api/admin](http://localhost:8000/api/admin) (Atenção, aqui pode não ser a mesma porta 8000 no seu. Verifique a porta em que está rodando no terminal em que você executou o comando "python manage.py runserver").
 
 Estando na página do Django admin podemos entrar com os dados do usuário que criamos no passo 7.
