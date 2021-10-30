@@ -7,58 +7,60 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0004_alter_person_age'),
+        ("core", "0004_alter_person_age"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='donation',
-            name='description',
+            model_name="donation",
+            name="description",
             field=models.TextField(null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='address',
+            model_name="person",
+            name="address",
             field=models.CharField(max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='age',
+            model_name="person",
+            name="age",
             field=models.IntegerField(null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='city',
+            model_name="person",
+            name="city",
             field=models.CharField(max_length=120, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='cpf',
+            model_name="person",
+            name="cpf",
             field=models.CharField(max_length=20, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='family',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.family'),
+            model_name="person",
+            name="family",
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, to="core.family"
+            ),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='geolocation',
+            model_name="person",
+            name="geolocation",
             field=models.CharField(max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='ocupation',
+            model_name="person",
+            name="ocupation",
             field=models.CharField(max_length=120, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='phone',
+            model_name="person",
+            name="phone",
             field=models.CharField(max_length=40, null=True),
         ),
         migrations.AlterField(
-            model_name='person',
-            name='state',
+            model_name="person",
+            name="state",
             field=models.CharField(max_length=120, null=True),
         ),
     ]

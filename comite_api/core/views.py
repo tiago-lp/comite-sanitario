@@ -3,10 +3,12 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from core import models, serializers
 from rest_framework.permissions import IsAuthenticated
+
 # from django.http import HttpResponse
 # from django.conf import settings
 # import os
 # from django.views.generic import View
+
 
 class BaseViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk):
@@ -38,6 +40,7 @@ class DonationViewSet(BaseViewSet):
 
     queryset = models.Donation.objects.filter(deleted=False)
     serializer_class = serializers.DonationSerializer
+
 
 # class FrontendAppView(View):
 #     """

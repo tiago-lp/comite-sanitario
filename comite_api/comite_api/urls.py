@@ -13,10 +13,10 @@ router.register("families", views.FamilyViewSet)
 router.register("donations", views.DonationViewSet)
 
 urlpatterns = [
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/', include(router.urls)),
-    path('api/admin/', admin.site.urls),
+    path("api/token/", jwt_views.TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/", include(router.urls)),
+    path("api/admin/", admin.site.urls),
 ]
 
 if DEBUG:
