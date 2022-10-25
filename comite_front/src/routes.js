@@ -1,15 +1,12 @@
 import { Navigate, useRoutes } from 'react-router-dom';
-// layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-//
 import Login from './pages/Login';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/User';
 import Donation from './pages/Donation';
 import NotFound from './pages/Page404';
 
-// ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
