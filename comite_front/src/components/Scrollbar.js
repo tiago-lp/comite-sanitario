@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import SimpleBarReact from 'simplebar-react';
-// material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 
-// ----------------------------------------------------------------------
 
 const RootStyle = styled('div')({
   flexGrow: 1,
@@ -33,7 +31,6 @@ const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
   }
 }));
 
-// ----------------------------------------------------------------------
 
 Scrollbar.propTypes = {
   children: PropTypes.node.isRequired,
