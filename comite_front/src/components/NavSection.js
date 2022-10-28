@@ -4,11 +4,9 @@ import { Icon } from '@iconify/react';
 import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom';
 import arrowIosForwardFill from '@iconify/icons-eva/arrow-ios-forward-fill';
 import arrowIosDownwardFill from '@iconify/icons-eva/arrow-ios-downward-fill';
-// material
 import { alpha, useTheme, styled } from '@material-ui/core/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@material-ui/core';
 
-// ----------------------------------------------------------------------
 
 const ListItemStyle = styled((props) => <ListItemButton disableGutters {...props} />)(
   ({ theme }) => ({
@@ -42,7 +40,6 @@ const ListItemIconStyle = styled(ListItemIcon)({
   justifyContent: 'center'
 });
 
-// ----------------------------------------------------------------------
 
 NavItem.propTypes = {
   item: PropTypes.object,

@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
-// material
 import { alpha, styled } from '@material-ui/core/styles';
 
-// ----------------------------------------------------------------------
 
 const RootStyle = styled('span')(({ theme, styleProps }) => {
   const { color, variant } = styleProps;
@@ -60,7 +58,6 @@ const RootStyle = styled('span')(({ theme, styleProps }) => {
   };
 });
 
-// ----------------------------------------------------------------------
 
 export default function Label({ color = 'default', variant = 'ghost', children, ...other }) {
   return (
