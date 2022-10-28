@@ -8,7 +8,7 @@ import Donation from './pages/Donation';
 import NotFound from './pages/Page404';
 
 
-export default function Router() {
+const Router = () => {
   return useRoutes([
     {
       path: '/dashboard',
@@ -34,3 +34,5 @@ export default function Router() {
     { path: '*', element: <Navigate to="/404" replace /> }
   ]);
 }
+
+export default Router;

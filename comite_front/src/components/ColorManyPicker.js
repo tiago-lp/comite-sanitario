@@ -10,7 +10,7 @@ IconColor.propTypes = {
   sx: PropTypes.object
 };
 
-function IconColor({ sx, ...other }) {
+const IconColor = ({ sx, ...other }) => {
   return (
     <Box
       sx={{
@@ -41,7 +41,7 @@ ColorManyPicker.propTypes = {
   sx: PropTypes.object
 };
 
-export default function ColorManyPicker({ colors, onChecked, sx, ...other }) {
+const ColorManyPicker = ({ colors, onChecked, sx, ...other }) => {
   return (
     <Box sx={sx}>
       {colors.map((color) => {
@@ -96,3 +96,5 @@ export default function ColorManyPicker({ colors, onChecked, sx, ...other }) {
     </Box>
   );
 }
+
+export default ColorManyPicker;
